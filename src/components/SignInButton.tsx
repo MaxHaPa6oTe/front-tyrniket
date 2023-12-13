@@ -1,4 +1,5 @@
-"use client";
+'use client'
+
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
@@ -9,30 +10,22 @@ const SignInButton = () => {
 
   if (session && session.user)
     return (
-      <div className="flex gap-4 ml-auto">
-        <p className="text-sky-600">{session.user.name}</p>
+      <div>
+        <span>{session.user.name} |</span>
         <Link
           href={"/api/auth/signout"}
-          className="flex gap-4 ml-auto text-red-600"
-        >
-          Sign Out
+          >
+          | Выход
         </Link>
       </div>
     );
 
   return (
-    <div className="flex gap-4 ml-auto items-center">
+    <div>
       <Link
         href={"/api/auth/signin"}
-        className="flex gap-4 ml-auto text-green-600"
       >
-        Sign In
-      </Link>
-      <Link
-        href={"/signup"}
-        className="flex gap-4 ml-auto bg-green-600 text-green-200 p-2 rounded"
-      >
-        Sign Up
+        | Вход |
       </Link>
     </div>
   );

@@ -27,11 +27,16 @@ export const authOptions: NextAuthOptions = {
       name: "Credentials",
       credentials: {
         username: {
+          required: true,
           label: "Username",
           type: "text",
-          placeholder: "jsmith",
+          placeholder: "Введите ваш ник",
         },
-        password: { label: "Password", type: "password" },
+        password: { 
+          label: "Password",
+          type: "password",
+          required: true,
+    },
       },
       async authorize(credentials, req) {
         if (!credentials?.username || !credentials?.password) return null;
