@@ -12,7 +12,7 @@ export const metadata = {
 };
 
 const OtmetkiLayout = async (props: Props) => {
-  const session = await getServerSession(authOptions);
+  // const session = await getServerSession(authOptions);
   return (
     <div>
       <div>{props.children}</div>

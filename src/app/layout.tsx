@@ -22,7 +22,9 @@ export default function RootLayout(props: Props) {
     <html translate="no">
       <body className={openSans.className}>
         <Providers>
+          <header>
           <AppBar />
+          </header>
           {props.children}
         </Providers>
       </body>
