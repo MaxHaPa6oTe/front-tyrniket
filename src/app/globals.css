@@ -13,3 +13,13 @@ body {
     /* font-size: calc(var(--index) * 1.2); */
 }
 
+@keyframes smenaStranis {
+    0% {
+        opacity: 0;
+        transform: translateX(-400px);
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
