@@ -15,7 +15,7 @@ const OtmetkiLayout = async (props: Props) => {
   // const session = await getServerSession(authOptions);
   return (
     <div>
-      <div>{props.children}</div>
+      {props.children}
     </div>
   );
 };
