@@ -16,24 +16,26 @@ const Workers = () => {
  
   const [fio,setFio] = React.useState('')
   const [worker,setWorker] = React.useState<IWorker[]>([])
-  const [skolkoNado,setSkolkoNado] = React.useState(3)
+  const [skolkoNado,setSkolkoNado] = React.useState(1)
   const [oldFio, setOldFio] = React.useState('')
-  
+  const [count,setCount] = React.useState(0)  
   React.useEffect(()=>{
-    Poisk()
+    const timeOut = setTimeout(()=>Poisk(),1000)
+    return ()=>clearTimeout(timeOut)
   },[fio,skolkoNado])
   
   const Poisk = async () => {
-    if (fio === ' ' || fio === '') {
+    if (fio === ' ' || fio === '' || fio.length<3) {
       setWorker([])
-      setSkolkoNado(3)
+      setSkolkoNado(1)
+      setCount(0)
       return 
     }
     if (oldFio !== fio) {
-      setSkolkoNado(3)
+      setSkolkoNado(1)
     }
     await axios.post('http://localhost:8000/worker/all', {fio,skolkoNado})
-    .then(e=>{setWorker(e.data);setOldFio(fio)})
+    .then(e=>{setWorker(e.data.workers);setOldFio(fio);setCount(e.data.count)})
   }
 
   return <div>
@@ -54,7 +56,7 @@ const Workers = () => {
     })}
     </div>
     
-    {worker.length?<button 
+    {worker.length<count?<button 
     onClick={()=>setSkolkoNado(skolkoNado+2)}>
       Еще
     </button>:null}
