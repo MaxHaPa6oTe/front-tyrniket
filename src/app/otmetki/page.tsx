@@ -20,25 +20,29 @@ interface IWorker {
 const Otmetki = () => {
   const [fio,setFio] = useState('')
   const [poiskFio,setPoiskFio] = useState('')
-  const [dataS,setDataS] = useState('')
-  const [dataP,setDataP] = useState('')
-  const [worker,setWorker] = useState<IWorker[]>([])
-  const [tyrniket, setTyrniket] = useState<IZdanie[]>([])
+  const [DataS,setDataS] = useState('')
+  const [DataP,setDataP] = useState('')
+  const [workerPoisk,setWorkerPoisk] = useState<IWorker[]>([])
+  const [otmetkaVZdanii, setOtmetkaVZdanii] = useState<IZdanie[]>([])
+  const [zdanie,setZdanie] = useState(1)
+  const [worker,setWorker]=useState<null | number>(null)
+  const [otmetki,setOtmetki] = useState<any[]>([])
   React.useEffect(()=>{
     axios.get('http://localhost:8000/tyrniket')
-    .then(e=>setTyrniket(e.data))
+    .then(e=>setOtmetkaVZdanii(e.data))
   },[])
   React.useEffect(()=>{
     if (poiskFio === fio) return
     setFio(poiskFio)
     if (poiskFio === ' ' || poiskFio === '' || poiskFio.length<3) {
-      setWorker([])
+      setWorkerPoisk([])
+      setWorker(null)
       return 
     }
     const Timeout = setTimeout(async () => {
       setFio(poiskFio);
       await axios.post('http://localhost:8000/worker/all', {fio})
-    .then(e=>{setWorker(e.data);})
+    .then(o=>{setWorkerPoisk(o.data.workers);})
     },2000)
     return () => clearTimeout(Timeout)
   },[poiskFio])
@@ -53,7 +57,12 @@ const Otmetki = () => {
 //   }).then((res)=>console.log(res.data))
 //   .catch(e=>console.log(e.response.data.message));
 // }
-
+async function poiskOtmetok() {
+  if (DataS==='' || DataP==='' || fio==='') return
+    await axios.post('http://localhost:8000/otmetka/poisk', 
+    {DataS,DataP,zdanie,worker}).then(o=>setOtmetki(o.data))
+  return
+}
   return <div>
     <h3>Отметки</h3>
     <form className='search_form' onSubmit={(e)=>e.preventDefault()}>
@@ -76,8 +85,8 @@ const Otmetki = () => {
     <br/>
     <label>Выберите место:</label>
 <br/>
-<p></p><select onChange={e=>console.log(e.target.value)}>
-  {tyrniket.map(o=>{
+<select onChange={o=>setZdanie(+o.target.value)}>
+  {otmetkaVZdanii.map(o=>{
     return <option key={o.id} value={o.id}>
       {o.info}
       </option>})}
@@ -95,16 +104,26 @@ const Otmetki = () => {
     value={poiskFio}
     />
     <ul className="autocomplite">
-      {worker.map(o=>{
+      {workerPoisk.map(o=>{
         return <li key={o.id} 
-        onClick={()=>{setFio(o.fio);setPoiskFio(o.fio);setWorker([])}}
+        onClick={()=>{setWorker(o.id);setFio(o.fio);setPoiskFio(o.fio);setWorkerPoisk([])}}
         className='autocomplite_item'>
           {o.fio}
           </li>
       })}
     </ul>
-    <button onClick={()=>{}}>Поиск</button>
+    <button onClick={()=>poiskOtmetok()}>Поиск</button>
+    {}
     </form>
+    <table>
+      <tbody>
+      {otmetki.map((o:any)=>{
+        return <tr key={o.id}>
+        <td>{o.createdAt}</td><td>{o.tyrniket.info}</td><td>{o.worker.fio}</td> 
+    </tr>
+      })}
+      </tbody>
+      </table>
     </div>;
 };
 
