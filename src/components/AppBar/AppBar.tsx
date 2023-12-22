@@ -2,6 +2,9 @@
 import Link from "next/link";
 import React from "react";
 import './AppBar.css'
+import Image from "next/image";
+import menu from './free-icon-menu-1301992.png'
+import akk from './user.png'
 
 const AppBar = () => {
   const [bar,setBar] = React.useState(false)
@@ -17,7 +20,11 @@ const AppBar = () => {
   return (
     <>
       <div className="AppBar">
-        <button onClick={()=>setBar(!bar)}>xyi</button>
+        <div className="naz">
+        <Image src={menu} alt='' className="logo" onClick={()=>setBar(!bar)}/>
+        <i>Сервис по проходам</i> 
+        </div>
+        <Image src={akk} alt='' className="logo"/>
       </div>
       {bar && <div className="menu" ref={wrapRef}>
             <div className="close">

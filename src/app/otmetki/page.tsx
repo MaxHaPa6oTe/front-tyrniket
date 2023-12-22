@@ -64,8 +64,18 @@ async function poiskOtmetok() {
   return
 }
   return <div>
-    <h3>Отметки</h3>
+    <div className='Otmetki'>
     <form className='search_form' onSubmit={(e)=>e.preventDefault()}>
+    <h3>Отметки</h3>
+    <label>Выберите место:</label>
+<br/>
+<select onChange={o=>setZdanie(+o.target.value)}>
+  {otmetkaVZdanii.map(o=>{
+    return <option key={o.id} value={o.id}>
+      {o.info}
+      </option>})}
+</select>
+<br/>
     <p>Выберите дату:</p>
     <label>с какого</label>
     <input
@@ -83,15 +93,6 @@ async function poiskOtmetok() {
     onChange={(e) => setDataP(e.target.value)}
     />
     <br/>
-    <label>Выберите место:</label>
-<br/>
-<select onChange={o=>setZdanie(+o.target.value)}>
-  {otmetkaVZdanii.map(o=>{
-    return <option key={o.id} value={o.id}>
-      {o.info}
-      </option>})}
-</select>
-<br/>
 <label>Выберите сотрудника:</label>    
     <br/>
     <input
@@ -115,6 +116,8 @@ async function poiskOtmetok() {
     <button onClick={()=>poiskOtmetok()}>Поиск</button>
     {}
     </form>
+    </div>
+    <hr/>
     <table>
       <tbody>
       {otmetki.map((o:any)=>{

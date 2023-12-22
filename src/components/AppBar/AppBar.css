@@ -1,11 +1,9 @@
 @keyframes visibleBar {
     0% {
-        opacity: 0;
         transform: translateX(-200px);
     }
     100% {
         transform: translateX(0);
-        opacity: 1;
     }
 }
 .AppBar {
@@ -13,7 +11,10 @@
     width: 100%;
     height: 50px;
     color:Snow; 
-
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
 }
 .shapka {
     display: flex;
@@ -29,6 +30,15 @@
 .otstyp {
 margin-top: 50px;
 }
+.naz {
+    margin-top: 4px;
+    font-size: 24px;
+    display: flex;
+}
+.naz i {
+    margin-left: 14px;
+    margin-top: -2px;
+}
 .menu {
     top:0;
     position: absolute;
@@ -37,6 +47,7 @@ margin-top: 50px;
     height: 100%;
     animation: visibleBar .4s forwards;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, .4);
+    z-index: 1;
 }
 .close {
     display: flex;
@@ -50,4 +61,9 @@ margin-top: 50px;
 .otstyp {
     width: 96%;
     margin: 10% 0 0 2%;
+}
+.logo {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
 }
