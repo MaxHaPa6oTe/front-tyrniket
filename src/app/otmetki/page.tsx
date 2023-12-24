@@ -63,19 +63,29 @@ async function poiskOtmetok() {
     {DataS,DataP,zdanie,worker}).then(o=>setOtmetki(o.data))
   return
 }
-  return <div>
-    <div className='Otmetki'>
-    <form className='search_form' onSubmit={(e)=>e.preventDefault()}>
+async function Download() {
+  if (DataS==='' || DataP==='' || fio==='') return
+    await axios.get(`http://localhost:8000/otmetka/download?DataS=${DataS}&DataP=${DataP}&zdanie=${zdanie}`)
+    .catch(e=>console.log(e))
+  return
+}
+  return <div className='otm'>
+    <form onSubmit={(e)=>e.preventDefault()}>
+    <div className='filtr'>
+    <div className='filtr_naz'>
     <h3>Отметки</h3>
+    </div>
+      <div className='filtr_form_1'>
     <label>Выберите место:</label>
-<br/>
+    <br/>
 <select onChange={o=>setZdanie(+o.target.value)}>
   {otmetkaVZdanii.map(o=>{
     return <option key={o.id} value={o.id}>
       {o.info}
       </option>})}
 </select>
-<br/>
+</div>
+<div className='filtr_form_2'>
     <p>Выберите дату:</p>
     <label>с какого</label>
     <input
@@ -92,9 +102,10 @@ async function poiskOtmetok() {
     required
     onChange={(e) => setDataP(e.target.value)}
     />
-    <br/>
+    </div>
+    <div className='filtr_form_3'>
 <label>Выберите сотрудника:</label>    
-    <br/>
+<br/>
     <input
     name='fio'
     className="search_input"
@@ -113,20 +124,26 @@ async function poiskOtmetok() {
           </li>
       })}
     </ul>
-    <button onClick={()=>poiskOtmetok()}>Поиск</button>
-    {}
-    </form>
     </div>
-    <hr/>
+    <div className='filter_form_button'>
+    <a href={`http://localhost:8000/otmetka/download?DataS=${DataS}&DataP=${DataP}&zdanie=${zdanie}`}>Скачать</a>
+    <button onClick={()=>poiskOtmetok()}>Показать</button>
+    </div>
+    </div>
+    </form>
+    <div className='otmetki'>
     <table>
       <tbody>
       {otmetki.map((o:any)=>{
+        let data = o.createdAt.substring(0,o.createdAt.length-5)
+        data = data.replace('T', ' ')
         return <tr key={o.id}>
-        <td>{o.createdAt}</td><td>{o.tyrniket.info}</td><td>{o.worker.fio}</td> 
+        <td>{data}</td><td>{o.tyrniket.info}</td><td>{o.worker.fio}</td> 
     </tr>
       })}
       </tbody>
-      </table>
+       </table>
+      </div>
     </div>;
 };
 
