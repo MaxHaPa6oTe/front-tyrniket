@@ -1,16 +1,10 @@
 .container {
   position: absolute;
-  top:90px;
+  top:80px;
   left: 0;
   right: 0;
   margin: auto;
   max-width: 600px;
-  height: 140px;
-  border-radius: 20px;
-  padding: 26px 30px 0 30px;
-  box-sizing: border-box;
-  background: #ecf0f3;
-  box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
 }
 
 .inputs {
@@ -33,3 +27,25 @@
   box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
 }
 
+.yi {
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 10px;
+  text-align: center;
+  height: 200px;
+  width: 170px;
+  border: 1px solid gray;
+  transition: .4s;
+}
+.yi:hover {
+  transform: scale(1.05); /* Увеличиваем масштаб */
+}
+.yii {
+  position: absolute;
+  top: 200px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding-left: 30px;
+  padding-right: 30px;
+}

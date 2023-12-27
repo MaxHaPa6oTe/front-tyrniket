@@ -35,11 +35,14 @@ const AppBar = () => {
               </span>
               </div>
               <hr className="otstyp"/>
+        <Link href='/workers/worker' className="shapka" onClick={()=>setBar(!bar)}>
+          Добавить сотрудника
+          </Link>
         <Link href='/otmetki' className="shapka" onClick={()=>setBar(!bar)}>
-          Отметки
+          Посмотреть отметки
           </Link>
         <Link href='/workers' className="shapka" onClick={()=>setBar(!bar)}>
-          Работники
+          Поиск сотрудника
           </Link>
         <Link href='/tyrnikets' className="shapka" onClick={()=>setBar(!bar)}>
           Турникеты

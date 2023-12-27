@@ -39,17 +39,17 @@ const Workers = () => {
     .then(e=>{setWorker(e.data.workers);setOldFio(fio);setCount(e.data.count)})
   }
 
-  return <div className="container">
-    <form onSubmit={e=>e.preventDefault()}>
+  return <div>
+    <form className="container" onSubmit={e=>e.preventDefault()}>
     <h3>Работники</h3>
     <input className="inputs"
     onChange={e=>setFio(e.target.value)}
     required
     placeholder="Введите ФИО сотрудника"/>
     </form>
-    <div>
+    <div className="yii">
       {worker.map((o)=>{
-      return <div key={o.id}>
+      return <div key={o.id} className="yi">
         <img src={`http://localhost:8000/${o.photo}`} style={{width:'120px'}} alt={o.fio}/>
         <p>{o.fio}</p>
       </div>
