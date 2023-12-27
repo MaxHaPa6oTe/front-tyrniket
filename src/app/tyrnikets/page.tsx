@@ -1,6 +1,7 @@
 'use client'
 import axios from "axios";
 import React from "react";
+import './tyrniket.css'
 
 interface ITyrniket {
     id: number,
@@ -17,11 +18,13 @@ return <div>
     <h3>
     Турникеты
     </h3>
-    <table>
-            <tbody>
+    <table className="tablee">
+            <thead>
             <tr>
-                <td>ID</td><td>Oписание</td> 
+                <th>ID</th><th>Oписание</th> 
             </tr>
+            </thead>
+            <tbody>
             {table?table.map(o=>
                 <tr key={o.id}>
                 <td>{o.id}</td><td>{o.info}</td> 

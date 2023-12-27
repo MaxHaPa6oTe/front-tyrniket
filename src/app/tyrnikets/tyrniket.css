@@ -1,0 +1,9 @@
+.tablee {
+ position: absolute;
+ top:100px;
+ left: 50px;
+}
+.tablee td, th {
+    border: 1px solid gray;
+    padding: 10px;
+}

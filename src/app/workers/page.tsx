@@ -1,6 +1,7 @@
 'use client'
 import axios from "axios";
 import React from "react";
+import './workers.css'
 
 interface IWorker {
   id: number,
@@ -38,24 +39,22 @@ const Workers = () => {
     .then(e=>{setWorker(e.data.workers);setOldFio(fio);setCount(e.data.count)})
   }
 
-  return <div>
-    <h3>Работники</h3>
+  return <div className="container">
     <form onSubmit={e=>e.preventDefault()}>
-    <input
+    <h3>Работники</h3>
+    <input className="inputs"
     onChange={e=>setFio(e.target.value)}
     required
     placeholder="Введите ФИО сотрудника"/>
     </form>
-    <div style={{display:'flex'}}>
+    <div>
       {worker.map((o)=>{
       return <div key={o.id}>
-        <img src={`http://localhost:8000/${o.photo}`} width={150} alt={o.fio}/>
-        <p>{o.otdel}</p>
+        <img src={`http://localhost:8000/${o.photo}`} style={{width:'120px'}} alt={o.fio}/>
         <p>{o.fio}</p>
       </div>
     })}
     </div>
-    
     {worker.length<count?<button 
     onClick={()=>setSkolkoNado(skolkoNado+2)}>
       Еще

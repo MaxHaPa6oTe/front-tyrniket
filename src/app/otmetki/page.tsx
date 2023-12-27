@@ -24,7 +24,7 @@ const Otmetki = () => {
   const [DataP,setDataP] = useState('')
   const [workerPoisk,setWorkerPoisk] = useState<IWorker[]>([])
   const [otmetkaVZdanii, setOtmetkaVZdanii] = useState<IZdanie[]>([])
-  const [zdanie,setZdanie] = useState(1)
+  const [zdanie,setZdanie] = useState('1')
   const [worker,setWorker]=useState<null | number>(null)
   const [otmetki,setOtmetki] = useState<any[]>([])
   React.useEffect(()=>{
@@ -61,12 +61,7 @@ async function poiskOtmetok() {
   if (DataS==='' || DataP==='' || fio==='') return
     await axios.post('http://localhost:8000/otmetka/poisk', 
     {DataS,DataP,zdanie,worker}).then(o=>setOtmetki(o.data))
-  return
-}
-async function Download() {
-  if (DataS==='' || DataP==='' || fio==='') return
-    await axios.get(`http://localhost:8000/otmetka/download?DataS=${DataS}&DataP=${DataP}&zdanie=${zdanie}`)
-    .catch(e=>console.log(e))
+    .catch(()=>console.log({DataS,DataP,zdanie,worker}))
   return
 }
   return <div className='otm'>
@@ -78,7 +73,7 @@ async function Download() {
       <div className='filtr_form_1'>
     <label>Выберите место:</label>
     <br/>
-<select onChange={o=>setZdanie(+o.target.value)}>
+<select onChange={o=>setZdanie(o.target.value)}>
   {otmetkaVZdanii.map(o=>{
     return <option key={o.id} value={o.id}>
       {o.info}
@@ -111,7 +106,7 @@ async function Download() {
     className="search_input"
     type='text'
     autoComplete='off'
-    placeholder="Введие ФИО сотрудника"
+    placeholder="Введие ФИО"
     onChange={(e) => setPoiskFio(e.target.value)}
     value={poiskFio}
     />
