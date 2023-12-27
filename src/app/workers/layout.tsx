@@ -8,7 +8,7 @@ type Props = {
 
 export const metadata = {
   title: "Работники",
-  description: "Поиск работника Метроэлектротранс",
+  description: "Поиск, добавление работника Метроэлектротранс",
 };
 
 const WorkersLayout = async (props: Props) => {
