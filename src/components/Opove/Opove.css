@@ -1,0 +1,47 @@
+@keyframes opovOn {
+    0% {
+        opacity: 0;
+        right: -300px;
+    }
+    100% {
+        opacity: 1;
+        right: 20px;
+    }
+}
+
+@keyframes opovOff {
+    0% {
+        opacity: 1;
+        right: 20px;
+    }
+    100% {
+        opacity: 0;
+        right: -300px;
+    }
+}
+.circle {
+z-index: 1;
+box-shadow: rgba(0, 0, 0, .5) 0 6px 24px;
+position: absolute;
+bottom: 24px;
+right: 18px;
+background-color: rgb(0,120,0);
+color: snow;
+padding: 16px;
+border-radius: 8px;
+display: flex;
+justify-content: space-between;
+width: 280px;
+}
+.circle.entering {
+  animation: opovOn .4s forwards;
+}
+.circle.entered {
+
+}
+.circle.exiting {
+  animation: opovOff .4s forwards;
+}
+.circle.exiting {
+
+}
