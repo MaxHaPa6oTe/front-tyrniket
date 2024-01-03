@@ -50,6 +50,12 @@
     display: flex;
     justify-content: space-evenly;
 }
+.filter_form_button button {
+    padding: 4px;
+}
+.filter_form_button button:active {
+    scale: .96;
+}
 .otm {
     display: flex;
 }
