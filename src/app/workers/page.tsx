@@ -2,6 +2,7 @@
 import axios from "axios";
 import React from "react";
 import './workers.css'
+import Button from "@/components/Button/Button";
 
 interface IWorker {
   id: number,
@@ -17,7 +18,7 @@ const Workers = () => {
  
   const [fio,setFio] = React.useState('')
   const [worker,setWorker] = React.useState<IWorker[]>([])
-  const [skolkoNado,setSkolkoNado] = React.useState(1)
+  const [skolkoNado,setSkolkoNado] = React.useState(3)
   const [oldFio, setOldFio] = React.useState('')
   const [count,setCount] = React.useState(0)  
   React.useEffect(()=>{
@@ -28,12 +29,12 @@ const Workers = () => {
   const Poisk = async () => {
     if (fio === ' ' || fio === '' || fio.length<3) {
       setWorker([])
-      setSkolkoNado(1)
+      setSkolkoNado(3)
       setCount(0)
       return 
     }
     if (oldFio !== fio) {
-      setSkolkoNado(1)
+      setSkolkoNado(3)
     }
     await axios.post('http://localhost:8000/worker/all', {fio,skolkoNado})
     .then(e=>{setWorker(e.data.workers);setOldFio(fio);setCount(e.data.count)})
@@ -54,11 +55,14 @@ const Workers = () => {
         <p>{o.fio}</p>
       </div>
     })}
+    {worker.length<count?<div
+    className="eche"
+    onClick={()=>setSkolkoNado(skolkoNado+3)}> 
+    <Button> 
+      Еще?
+    </Button>
+    </div>:null}
     </div>
-    {worker.length<count?<button 
-    onClick={()=>setSkolkoNado(skolkoNado+2)}>
-      Еще
-    </button>:null}
     </div>;
 };
 
