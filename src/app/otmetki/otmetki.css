@@ -56,6 +56,11 @@
 .filter_form_button button:active {
     scale: .96;
 }
+.aDisabled {
+    pointer-events: none; /* делаем ссылку некликабельной */
+    cursor: default;  /* устанавливаем курсор в виде стрелки */
+    color: gray; /* цвет текста для нективной ссылки */
+}
 .otm {
     display: flex;
 }
@@ -70,7 +75,7 @@
     padding: 10px;
     border: 1px solid gray;
 }
-.filtr input, select {
+.filtr input, .filtr select {
     padding: 2px;
     margin: 2px;
 }

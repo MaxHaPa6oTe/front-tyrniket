@@ -28,7 +28,7 @@ const Otmetki = () => {
   const [worker,setWorker]=useState<null | number>(null)
   const [otmetki,setOtmetki] = useState<any[]>([])
   React.useEffect(()=>{
-    axios.get('http://localhost:8000/tyrniket')
+    axios.get('http://localhost:8000/tyrniket/zdanie')
     .then(e=>setOtmetkaVZdanii(e.data))
   },[])
   React.useEffect(()=>{
@@ -61,7 +61,7 @@ async function poiskOtmetok() {
   if (DataS==='' || DataP==='' || fio==='') return
     await axios.post('http://localhost:8000/otmetka/poisk', 
     {DataS,DataP,zdanie,worker}).then(o=>setOtmetki(o.data))
-    .catch(()=>console.log({DataS,DataP,zdanie,worker}))
+    .catch(()=>console.log("ошибка"))
   return
 }
   return <div className='otm'>
@@ -121,7 +121,9 @@ async function poiskOtmetok() {
     </ul>
     </div>
     <div className='filter_form_button'>
-    <a href={`http://localhost:8000/otmetka/download?DataS=${DataS}&DataP=${DataP}&zdanie=${zdanie}`}>Скачать</a>
+    <a href={`http://localhost:8000/otmetka/download?DataS=${DataS}&DataP=${DataP}&zdanie=${zdanie}&worker=${worker}`}
+    className={worker && DataS && DataP?'':'aDisabled'}    
+    >Скачать</a>
     <button onClick={()=>poiskOtmetok()}>Показать</button>
     </div>
     </div>
