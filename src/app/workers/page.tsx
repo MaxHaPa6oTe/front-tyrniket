@@ -3,6 +3,7 @@ import axios from "axios";
 import React from "react";
 import './workers.css'
 import Button from "@/components/Button/Button";
+import { useRouter } from 'next/navigation'
 
 interface IWorker {
   id: number,
@@ -15,7 +16,7 @@ interface IWorker {
 }
 
 const Workers = () => {
- 
+  const router = useRouter()
   const [fio,setFio] = React.useState('')
   const [worker,setWorker] = React.useState<IWorker[]>([])
   const [skolkoNado,setSkolkoNado] = React.useState(3)
@@ -50,7 +51,7 @@ const Workers = () => {
     </form>
     <div className="yii">
       {worker.map((o)=>{
-      return <div key={o.id} className="yi">
+      return <div key={o.id} className="yi" onClick={()=>router.push(`/workers/worker/${o.id}`)}>
         <img src={`http://localhost:8000/${o.photo}`} style={{width:'120px'}} alt={o.fio}/>
         <p>{o.fio}</p>
       </div>

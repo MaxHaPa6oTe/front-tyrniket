@@ -6,6 +6,7 @@ import Button from "@/components/Button/Button";
 import Opove from "@/components/Opove/Opove";
 import anonim from './anonim.png'
 import Image from "next/image";
+import Button2 from "@/components/ButtonGPT/Button2";
 
 const AddWorker = () => {
 
@@ -29,7 +30,7 @@ const AddWorker = () => {
     formData.append('karta',karta)
     formData.append('photo',photo as Blob)
     await axios.post('http://localhost:8000/worker/create',formData)
-    .then(()=>{setOpov(true);setOshibka('');setFio('');
+    .then(()=>{setOpov(true);setOshibka('');setFio('');setImage('');
     setOtdel('');setPhone('');setKarta('');setPhoto(null)})
     .catch(e=>setOshibka(e.response.data.message))
     if (opov === true) setTimeout(()=>setOpov(false),5200)
@@ -115,7 +116,7 @@ const AddWorker = () => {
 
     <div className="addRab">
     <div onClick={ADD}>
-    <Button>Добавить</Button>
+    <Button2/>
     </div>
     </div>
     <br/>
