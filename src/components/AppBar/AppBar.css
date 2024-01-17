@@ -11,12 +11,13 @@
     position: fixed;
     background: linear-gradient(to right, rgb(0, 30, 60), rgb(30, 30, 30));
     width: 100%;
-    height: 50px;
+    height: 60px;
     color:Snow; 
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
+    box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.5);
 }
 .shapka {
     display: flex;
@@ -33,9 +34,9 @@
 margin-top: 50px;
 }
 .naz {
-    margin-top: 4px;
     font-size: 24px;
     display: flex;
+    cursor: pointer;
 }
 .naz i {
     margin-left: 14px;
@@ -67,5 +68,14 @@ margin-top: 50px;
 .logo {
     width: 30px;
     height: 30px;
+}
+.sprava {
     cursor: pointer;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.sprava span {
+font-size: 14px;
 }

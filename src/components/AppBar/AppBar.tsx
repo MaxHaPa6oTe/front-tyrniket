@@ -5,8 +5,11 @@ import './AppBar.css'
 import Image from "next/image";
 import menu from './free-icon-menu-1301992.png'
 import akk from './user.png'
+import { useSession } from "next-auth/react";
+
 
 const AppBar = () => {
+  const { data: session } = useSession();
   const [bar,setBar] = React.useState(false)
   const wrapRef = React.useRef<any>(null)
   const handleClick = (e:Event) => {
@@ -24,7 +27,10 @@ const AppBar = () => {
         <Image src={menu} alt='' className="logo" onClick={()=>setBar(!bar)}/>
         <i>Сервис по проходам</i> 
         </div>
+        <div className="sprava">
         <Image src={akk} alt='' className="logo"/>
+        <span>User</span>
+        </div>
       </div>
       {bar && <div className="menu" ref={wrapRef}>
             <div className="close">

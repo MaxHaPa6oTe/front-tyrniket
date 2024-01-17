@@ -1,16 +1,17 @@
 import React, { useRef, useEffect } from 'react';
-import './Button2.css'; // Assuming you have some CSS styles defined
+import './Button2.css'; 
 
-const Button2: React.FC = () => {
+interface IButton2 {
+  text: string
+}
+const Button2: React.FC<IButton2> = ({text}) => {
   
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    // Access the current button reference
     const button = buttonRef.current;
 
     if (button) {
-      // The handler is better created inside the effect to avoid adding/removing it unnecessarily
       const handleAnimation = (e: MouseEvent) => {
         button.classList.remove('animate');
         button.classList.add('animate');
@@ -19,19 +20,16 @@ const Button2: React.FC = () => {
         }, 700);
       };
 
-      // Add event listener
       button.addEventListener('click', handleAnimation);
 
-      // Cleanup the event listener when the component is unmounted
       return () => {
         button.removeEventListener('click', handleAnimation);
       };
     }
   }, []);
 
-  // Assign the ref to the button with the `ref` prop
   return (
-    <button ref={buttonRef} className="bubbly-button">Click me!</button>
+    <button ref={buttonRef} className="bubbly-button">{text}</button>
   );
 };
 
