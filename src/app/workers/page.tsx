@@ -1,9 +1,9 @@
 'use client'
-import axios from "axios";
 import React from "react";
 import './workers.css'
 import Button from "@/components/Button/Button";
 import { useRouter } from 'next/navigation'
+import useAuthenticatedFetch from '../../lib/myHook';
 
 interface IWorker {
   id: number,
@@ -16,6 +16,7 @@ interface IWorker {
 }
 
 const Workers = () => {
+  const { isReady, authenticatedAxiosPost } = useAuthenticatedFetch();
   const router = useRouter()
   const [fio,setFio] = React.useState('')
   const [worker,setWorker] = React.useState<IWorker[]>([])
@@ -37,7 +38,23 @@ const Workers = () => {
     if (oldFio !== fio) {
       setSkolkoNado(3)
     }
-    await axios.post('http://localhost:8000/worker/all', {fio,skolkoNado})
+    // await axios.post(
+    //   'http://localhost:8000/worker/all',
+    //   {
+    //     fio,
+    //     skolkoNado
+    //   },
+    //   {
+    //     headers: {
+    //       authorization: `Bearer ${session?.backendTokens?.accessToken}`
+    //     }
+    //   }
+    // )
+    if (!isReady) return;
+      const response = await authenticatedAxiosPost(
+        'http://localhost:8000/worker/all',
+        {fio,skolkoNado}
+      )
     .then(e=>{setWorker(e.data.workers);setOldFio(fio);setCount(e.data.count)})
   }
 

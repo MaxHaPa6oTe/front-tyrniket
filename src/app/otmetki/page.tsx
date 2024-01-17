@@ -1,8 +1,7 @@
 "use client";
 import './otmetki.css'
 import React, { useState } from "react";
-import axios from 'axios'
-
+import { useAuthenticatedAxios } from '../../lib/myHook';
 
 interface IZdanie {
   id: number,
@@ -18,6 +17,7 @@ interface IWorker {
   photo: string
 }
 const Otmetki = () => {
+  const axios = useAuthenticatedAxios();
   const [fio,setFio] = useState('')
   const [poiskFio,setPoiskFio] = useState('')
   const [DataS,setDataS] = useState('')
@@ -46,17 +46,7 @@ const Otmetki = () => {
     },2000)
     return () => clearTimeout(Timeout)
   },[poiskFio])
-  // const session = await getServerSession(authOptions);
-//   function response() {
-//     axios.post('http://localhost:8000/otmetka/all', {
-//     // headers: {
-//     //   // authorization: `Bearer ${session?.backendTokens.accessToken}`,
-//     //   "Content-Type": "application/json",
-//     // },
-//   DataS:dataS,DataP:dataP
-//   }).then((res)=>console.log(res.data))
-//   .catch(e=>console.log(e.response.data.message));
-// }
+
 async function poiskOtmetok() {
   if (DataS==='' || DataP==='' || fio==='') return
     await axios.post('http://localhost:8000/otmetka/poisk', 

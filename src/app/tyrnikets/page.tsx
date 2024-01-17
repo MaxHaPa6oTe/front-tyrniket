@@ -1,8 +1,8 @@
 'use client'
-import axios from "axios";
 import React from "react";
 import './tyrniket.css'
 import Opove from "@/components/Opove/Opove";
+import { useSession } from "next-auth/react";
 
 interface ITyrniket {
     id: number,
@@ -17,6 +17,8 @@ interface IZdanie {
 }
 
 const Tyrnikets = () => {
+    const { data: session } = useSession();
+
     const [opov,setOpov] = React.useState<number>(0)
 const [oshibkaT,setOshibkaT] = React.useState('')
 const [oshibkaZd,setOshibkaZd] = React.useState('')
@@ -30,7 +32,7 @@ React.useEffect(()=>{
     .then(o=>setZdanie(o.data)).catch(e=>console.log('ошибка'))
     axios.get('http://localhost:8000/tyrniket')
     .then(o=>setTable(o.data)).catch(e=>console.log('ошибка'))
-},[opov])
+},[opov,session])
 
 const addT = async () => {
     let otvet = confirm('Вы хотите добавить новый турникет? В случае чего, удалять его придется в ручную')

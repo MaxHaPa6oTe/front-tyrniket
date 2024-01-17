@@ -5,6 +5,7 @@ declare module "next-auth" {
     user: {
       id: number;
       name: string;
+      role: string;
     };
 
     backendTokens: {
@@ -22,6 +23,7 @@ declare module "next-auth/jwt" {
     user: {
       id: number;
       name: string;
+      role: string;
     };
 
     backendTokens: {

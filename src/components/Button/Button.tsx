@@ -1,11 +1,11 @@
 import './Button.css'
 
-interface Props {
+interface IButton {
     children?:string;
     clickGo?:()=>void;
 }
 
-const Button = ({children,clickGo}: Props) => {
+const Button:React.FC<IButton> = ({children,clickGo}) => {
     return <div className=''>
     <button className="animated-button">
     <span></span>

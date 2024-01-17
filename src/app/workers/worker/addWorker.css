@@ -1,6 +1,6 @@
 .addWorker {
     position: absolute;
-    top: -10px;
+    top: 10px;
     padding: 0 10px;
     height: 500px;
     bottom: 0;
@@ -33,6 +33,7 @@
     height: 230px;
     border-radius: 50%;
     object-fit: cover;
+    pointer-events: none;
 }
 .addWorker h2 {
     text-align: center;
@@ -47,7 +48,7 @@
 .addWorker h6 {
     text-align: center;
     color: red;
-    margin: 10px;
+    margin: 2px;
 }
 .forma {
     margin: auto;

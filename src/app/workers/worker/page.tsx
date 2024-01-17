@@ -2,13 +2,14 @@
 import React from "react";
 import axios from "axios";
 import './addWorker.css'
-import Button from "@/components/Button/Button";
 import Opove from "@/components/Opove/Opove";
 import anonim from './anonim.png'
 import Image from "next/image";
 import Button2 from "@/components/ButtonGPT/Button2";
+import { useSession } from "next-auth/react";
 
 const AddWorker = () => {
+  const { data: session } = useSession();
 
   const formData = new FormData()
   const [opov,setOpov] = React.useState<boolean>(false)
@@ -29,7 +30,16 @@ const AddWorker = () => {
     formData.append('phone',phone)
     formData.append('karta',karta)
     formData.append('photo',photo as Blob)
-    await axios.post('http://localhost:8000/worker/create',formData)
+    // await axios.post('http://localhost:8000/worker/create',formData)
+    await axios.post(
+      'http://localhost:8000/worker/create',
+      formData,
+      {
+        headers: {
+          authorization: `Bearer ${session?.backendTokens?.accessToken}`
+        }
+      }
+    )
     .then(()=>{setOpov(true);setOshibka('');setFio('');setImage('');
     setOtdel('');setPhone('');setKarta('');setPhoto(null)})
     .catch(e=>setOshibka(e.response.data.message))
@@ -116,7 +126,7 @@ const AddWorker = () => {
 
     <div className="addRab">
     <div onClick={ADD}>
-    <Button2/>
+    <Button2 text="Добавить"/>
     </div>
     </div>
     <br/>
