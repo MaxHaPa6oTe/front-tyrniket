@@ -6,11 +6,9 @@ import Opove from "@/components/Opove/Opove";
 import anonim from './anonim.png'
 import Image from "next/image";
 import Button2 from "@/components/ButtonGPT/Button2";
-import { useSession } from "next-auth/react";
 
 const AddWorker = () => {
-  const { data: session } = useSession();
-
+  const [checkedValues, setCheckedValues] = React.useState<number[]>([]);
   const formData = new FormData()
   const [opov,setOpov] = React.useState<boolean>(false)
   const [fio,setFio] = React.useState<string>('')
@@ -20,28 +18,26 @@ const AddWorker = () => {
   const [photo,setPhoto] = React.useState<File | null>(null) 
   const [oshibka,setOshibka] = React.useState('')
   const [image,setImage] = React.useState('')
-
-  const ADD = async () => {
+  const [zdanie,setZdanie] = React.useState<null | any[]>(null)
+  React.useEffect(()=>{
+    axios.get('http://localhost:8000/tyrniket/zdanie').then(o=>setZdanie(o.data))
+  },[])
+  const ADD = () => {
     if (fio === ' ' || fio === '' || fio.length<3 || !photo) {
         return
     }
+    let array = ''
+    checkedValues.forEach(o=>array=array+o)
     formData.append('fio',fio)
     formData.append('otdel',otdel)
     formData.append('phone',phone)
     formData.append('karta',karta)
+    formData.append('dostyp',array)
     formData.append('photo',photo as Blob)
-    // await axios.post('http://localhost:8000/worker/create',formData)
-    await axios.post(
-      'http://localhost:8000/worker/create',
-      formData,
-      {
-        headers: {
-          authorization: `Bearer ${session?.backendTokens?.accessToken}`
-        }
-      }
-    )
+    axios.post('http://localhost:8000/worker/create',formData)
     .then(()=>{setOpov(true);setOshibka('');setFio('');setImage('');
-    setOtdel('');setPhone('');setKarta('');setPhoto(null)})
+    setOtdel('');setPhone('');setKarta('');setPhoto(null);
+  })
     .catch(e=>setOshibka(e.response.data.message))
     if (opov === true) setTimeout(()=>setOpov(false),5200)
   }
@@ -121,6 +117,24 @@ const AddWorker = () => {
     />
     <br/>
     </div>
+
+    <div className="dostyp">
+    <fieldset>
+  <legend>Доступ к объектам</legend>
+{zdanie?zdanie.map(o=><div key={o.id}>
+  <input type="checkbox" id={o.id} 
+  onChange={() => {
+    if (checkedValues.includes(o.id)) {
+      setCheckedValues(checkedValues.filter((id) => id !== o.id));
+    } else {
+      setCheckedValues([...checkedValues, o.id]);
+    }
+  }}/>
+  <label>{o.info}</label>
+  </div>):null}
+</fieldset>
+    </div>
+    
     </div>
     <br/>
 
