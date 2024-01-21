@@ -42,7 +42,7 @@
 .addRab {
     margin: auto;
     display: flex;
-    margin-top: 40px;
+    margin-top: 20px;
     justify-content: center;
 }
 .addWorker h6 {
@@ -55,7 +55,7 @@
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    max-width: 1000px;
+    max-width: 1200px;
 }
 .fot {
     margin-top: 20px;
@@ -65,10 +65,34 @@
     text-align: center;
     justify-content: center;
     width: 100%;
-    max-width: 400px;
+    max-width: 360px;
 }
 .infa {
     width: 100%;
-    max-width: 400px;
+    max-width: 360px;
 }
 
+.dostyp {
+    width: 100%;
+    max-width: 360px;
+    margin: 20px 0;
+}
+.dostyp fieldset {
+padding: 14px;
+border-radius: 8px;
+}
+.dostyp input{
+    margin: 10px 0;
+    width: 20px;
+    position: relative;
+    left: 280px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.dostyp label{
+    width: 220px;
+    position: relative;
+    /* left: -40px; */
+    display: inline-block;
+    vertical-align: middle;
+}
