@@ -3,20 +3,14 @@ import React from "react";
 import './tyrniket.css'
 import Opove from "@/components/Opove/Opove";
 import axios from 'axios'
-
-interface ITyrniket {
-    id: number,
-    info: string,
-    Zdanie: {
-        info: string
-    }
-} 
-interface IZdanie {
-    id:number,
-    info:string
-}
+import { Backend_URL } from "@/lib/Constants";
+import { useSession } from "next-auth/react";
+import { ITyrniket, IZdanie } from "@/lib/types";
 
 const Tyrnikets = () => {
+    const { data: session } = useSession();
+    axios.defaults.baseURL=Backend_URL
+    axios.defaults.headers.common = {'Authorization': `Bearer ${session?.backendTokens.accessToken}`}
     const [opov,setOpov] = React.useState<number>(0)
 const [oshibkaT,setOshibkaT] = React.useState('')
 const [oshibkaZd,setOshibkaZd] = React.useState('')
@@ -26,16 +20,16 @@ const [infoT,setInfoT] = React.useState('')
 const [zdanie,setZdanie] = React.useState<IZdanie[] | null>(null)
 const [table,setTable] = React.useState<ITyrniket[] | null>(null)
 React.useEffect(()=>{
-    axios.get('http://localhost:8000/tyrniket/zdanie')
+    axios.get('/tyrniket/zdanie')
     .then(o=>setZdanie(o.data)).catch(e=>console.log('ошибка'))
-    axios.get('http://localhost:8000/tyrniket')
+    axios.get('/tyrniket')
     .then(o=>setTable(o.data)).catch(e=>console.log('ошибка'))
 },[opov])
 
 const addT = async () => {
     let otvet = confirm('Вы хотите добавить новый турникет? В случае чего, удалять его придется в ручную')
     if (otvet) {
-    await axios.post('http://localhost:8000/tyrniket', {zdanie:idZd,info:infoT})
+    await axios.post('/tyrniket', {zdanie:idZd,info:infoT})
     .then(o=>{setOpov(1);setOshibkaT('');setInfoT('')}).catch(e=>setOshibkaT(e.response.data.message))
     if (opov!==0) setTimeout(()=>{setOpov(0)},5200)
     }
@@ -44,7 +38,7 @@ const addT = async () => {
 const addZd = async () => {
     let otvet = confirm('Вы хотите добавить новое здание? В случае чего, удалять его придется в ручную')
     if (otvet) {
-    await axios.post('http://localhost:8000/tyrniket/zdanie',{info:infoZd})
+    await axios.post('/tyrniket/zdanie',{info:infoZd})
     .then(o=>{setOpov(2);setOshibkaZd('');setInfoZd('')}).catch(e=>setOshibkaZd(e.response.data.message))
     if (opov!==0) setTimeout(()=>{setOpov(0)},5200)
     }

@@ -1,23 +1,15 @@
 "use client";
 import './otmetki.css'
 import React, { useState } from "react";
-import { useAuthenticatedAxios } from '../../lib/myHook';
+import { Backend_URL } from "@/lib/Constants";
+import { useSession } from "next-auth/react";
+import axios from 'axios';
+import { IWorker, IZdanie } from '@/lib/types';
 
-interface IZdanie {
-  id: number,
-  info: string
-}
-interface IWorker {
-  id: number,
-  createdAt: string,
-  otdel: string,
-  fio: string,
-  phone: string,
-  karta: string,
-  photo: string
-}
 const Otmetki = () => {
-  const axios = useAuthenticatedAxios();
+  const { data: session } = useSession();
+  axios.defaults.baseURL=Backend_URL
+  axios.defaults.headers.common = {'Authorization': `Bearer ${session?.backendTokens.accessToken}`}
   const [fio,setFio] = useState('')
   const [poiskFio,setPoiskFio] = useState('')
   const [DataS,setDataS] = useState('')
@@ -28,7 +20,7 @@ const Otmetki = () => {
   const [worker,setWorker]=useState<null | number>(null)
   const [otmetki,setOtmetki] = useState<any[]>([])
   React.useEffect(()=>{
-    axios.get('http://localhost:8000/tyrniket/zdanie')
+    axios.get('/tyrniket/zdanie')
     .then(e=>setOtmetkaVZdanii(e.data))
   },[])
   React.useEffect(()=>{
@@ -41,7 +33,7 @@ const Otmetki = () => {
     }
     const Timeout = setTimeout(async () => {
       setFio(poiskFio);
-      await axios.post('http://localhost:8000/worker/all', {fio})
+      await axios.post('/worker/all', {fio})
     .then(o=>{setWorkerPoisk(o.data.workers);})
     },2000)
     return () => clearTimeout(Timeout)
@@ -49,7 +41,7 @@ const Otmetki = () => {
 
 async function poiskOtmetok() {
   if (DataS==='' || DataP==='' || fio==='') return
-    await axios.post('http://localhost:8000/otmetka/poisk', 
+    await axios.post('/otmetka/poisk', 
     {DataS,DataP,zdanie,worker}).then(o=>setOtmetki(o.data))
     .catch(()=>console.log("ошибка"))
   return
@@ -111,7 +103,7 @@ async function poiskOtmetok() {
     </ul>
     </div>
     <div className='filter_form_button'>
-    <a href={`http://localhost:8000/otmetka/download?DataS=${DataS}&DataP=${DataP}&zdanie=${zdanie}&worker=${worker}`}
+    <a href={`${Backend_URL}/otmetka/download?DataS=${DataS}&DataP=${DataP}&zdanie=${zdanie}&worker=${worker}`}
     className={worker && DataS && DataP?'':'aDisabled'}    
     >Скачать</a>
     <button onClick={()=>poiskOtmetok()}>Показать</button>

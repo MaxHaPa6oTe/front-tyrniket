@@ -1,13 +1,16 @@
 'use client'
 import React from "react";
-import axios from "axios";
 import './addWorker.css'
 import Opove from "@/components/Opove/Opove";
 import anonim from './anonim.png'
 import Image from "next/image";
 import Button2 from "@/components/ButtonGPT/Button2";
+import axios from "axios";
+import { useSession } from "next-auth/react";
+import { Backend_URL } from "@/lib/Constants";
 
 const AddWorker = () => {
+  const { data: session } = useSession();
   const [checkedValues, setCheckedValues] = React.useState<number[]>([]);
   const formData = new FormData()
   const [opov,setOpov] = React.useState<boolean>(false)
@@ -20,7 +23,9 @@ const AddWorker = () => {
   const [image,setImage] = React.useState('')
   const [zdanie,setZdanie] = React.useState<null | any[]>(null)
   React.useEffect(()=>{
-    axios.get('http://localhost:8000/tyrniket/zdanie').then(o=>setZdanie(o.data))
+    axios.defaults.baseURL=Backend_URL
+    axios.defaults.headers.common = {'Authorization': `Bearer ${session?.backendTokens.accessToken}`}
+    axios.get('/tyrniket/zdanie').then(o=>setZdanie(o.data))
   },[])
   const ADD = () => {
     if (fio === ' ' || fio === '' || fio.length<3 || !photo) {
@@ -34,7 +39,7 @@ const AddWorker = () => {
     formData.append('karta',karta)
     formData.append('dostyp',array)
     formData.append('photo',photo as Blob)
-    axios.post('http://localhost:8000/worker/create',formData)
+    axios.post('/worker/create',formData)
     .then(()=>{setOpov(true);setOshibka('');setFio('');setImage('');
     setOtdel('');setPhone('');setKarta('');setPhoto(null);
   })

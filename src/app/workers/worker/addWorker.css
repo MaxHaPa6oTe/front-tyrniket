@@ -80,6 +80,7 @@
 .dostyp fieldset {
 padding: 14px;
 border-radius: 8px;
+border: 1px solid DarkGrey;
 }
 .dostyp input{
     margin: 10px 0;

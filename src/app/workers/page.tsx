@@ -3,20 +3,13 @@ import React from "react";
 import './workers.css'
 import Button from "@/components/Button/Button";
 import { useRouter } from 'next/navigation'
-import useAuthenticatedFetch from '../../lib/myHook';
-
-interface IWorker {
-  id: number,
-  createdAt: string,
-  otdel: string,
-  fio: string,
-  phone: string,
-  karta: string,
-  photo: string
-}
+import axios from "axios";
+import { Backend_URL } from "@/lib/Constants";
+import { useSession } from "next-auth/react";
+import { IWorker } from "@/lib/types";
 
 const Workers = () => {
-  const { isReady, authenticatedAxiosPost } = useAuthenticatedFetch();
+  const { data: session } = useSession();
   const router = useRouter()
   const [fio,setFio] = React.useState('')
   const [worker,setWorker] = React.useState<IWorker[]>([])
@@ -38,23 +31,9 @@ const Workers = () => {
     if (oldFio !== fio) {
       setSkolkoNado(3)
     }
-    // await axios.post(
-    //   'http://localhost:8000/worker/all',
-    //   {
-    //     fio,
-    //     skolkoNado
-    //   },
-    //   {
-    //     headers: {
-    //       authorization: `Bearer ${session?.backendTokens?.accessToken}`
-    //     }
-    //   }
-    // )
-    if (!isReady) return;
-      const response = await authenticatedAxiosPost(
-        'http://localhost:8000/worker/all',
-        {fio,skolkoNado}
-      )
+    axios.defaults.headers.common = {'Authorization': `Bearer ${session?.backendTokens.accessToken}`}
+
+    const response = await axios.post(Backend_URL+'/worker/all', {fio, skolkoNado})
     .then(e=>{setWorker(e.data.workers);setOldFio(fio);setCount(e.data.count)})
   }
 
@@ -62,14 +41,14 @@ const Workers = () => {
     <form className="container" onSubmit={e=>e.preventDefault()}>
     <h3>Работники</h3>
     <input className="inputs"
-    onChange={e=>setFio(e.target.value)}
+    onChange={o=>setFio(o.target.value)}
     required
     placeholder="Введите ФИО сотрудника"/>
     </form>
     <div className="yii">
       {worker.map((o)=>{
       return <div key={o.id} className="yi" onClick={()=>router.push(`/workers/worker/${o.id}`)}>
-        <img src={`http://localhost:8000/${o.photo}`} style={{width:'120px'}} alt={o.fio}/>
+        <img src={`${Backend_URL}/${o.photo}`} style={{width:'120px'}} alt={o.fio}/>
         <p>{o.fio}</p>
       </div>
     })}
