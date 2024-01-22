@@ -42,11 +42,11 @@ const AppBar = () => {
         <Link href='/workers/worker' className="shapka" onClick={()=>setBar(!bar)}>
           Добавить сотрудника
           </Link>
-        <Link href='/otmetki' className="shapka" onClick={()=>setBar(!bar)}>
-          Посмотреть отметки
-          </Link>
-        <Link href='/workers' className="shapka" onClick={()=>setBar(!bar)}>
+          <Link href='/workers' className="shapka" onClick={()=>setBar(!bar)}>
           Поиск сотрудника
+          </Link>
+        <Link href='/otmetki' className="shapka" onClick={()=>setBar(!bar)}>
+          Поиск отметки
           </Link>
         <Link href='/tyrnikets' className="shapka" onClick={()=>setBar(!bar)}>
           Турникеты

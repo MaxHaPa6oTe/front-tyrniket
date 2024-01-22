@@ -3,22 +3,29 @@
 import './akk.css'
 import React from "react";
 import { useSession } from "next-auth/react";
-import SignInButton from '@/components/SignInButton';
+import Link from 'next/link';
 
 const Profile = () => {
   const { data: session } = useSession();
 
   return <div className="O1">
-    <SignInButton/>
     <h3>Ваш профиль</h3>
-    {session? <div>
-    <p>{session.user.id}</p>
-    <p>{session.user.name}</p>
-    <p>{session.user.role}</p>
-    {session.backendTokens.accessToken}
+    {session? <div className='prof'>
+      <br/>
+    <p><i>Логин: </i>{session.user.name}</p>
+    <br/>
+    <p><i>Роль: </i>{session.user.role}</p>
+    <br/>
     </div>
     :null
   }
+      <div className="exit">
+        <Link
+          href={"/api/auth/signout"}
+          >
+          Сменить аккаунт?
+        </Link>
+      </div>
     </div>;
 };
 

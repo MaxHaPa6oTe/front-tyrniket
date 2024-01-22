@@ -4,7 +4,29 @@
     bottom: 0;
     left: 0;
     right: 0;
-    width: 200px;
+    width: 300px;
     margin: auto;
-    height: 200px;
+    height: 300px;
+    border: 1px solid darkgrey;
+    border-radius: 8px;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+}
+.exit {
+    margin-top: 20px;
+}
+.exit a {
+    text-decoration: none;
+    color: black;
+    border: 1px solid darkblue;
+    padding: 10px 20px;
+}
+.exit a:hover {
+    background-color: darkblue;
+    color: snow;
+    transition: cubic-bezier(1,0,0,1) .3s all;
 }
