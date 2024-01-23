@@ -5,9 +5,11 @@ import './AppBar.css'
 import Image from "next/image";
 import menu from './free-icon-menu-1301992.png'
 import akk from './user.png'
+import { useRouter } from 'next/navigation'
 
 
 const AppBar = () => {
+  const router = useRouter()
   const [bar,setBar] = React.useState(false)
   const wrapRef = React.useRef<any>(null)
   const handleClick = (e:Event) => {
@@ -20,7 +22,7 @@ const AppBar = () => {
   },[])
   return (
     <>
-      <div className="AppBar">
+      {/* <div className="AppBar">
         <div className="naz">
         <Image src={menu} alt='' className="logo" onClick={()=>setBar(!bar)}/>
         <i>Сервис по проходам</i> 
@@ -54,7 +56,32 @@ const AppBar = () => {
         <Link href='/profile' className="shapka" onClick={()=>setBar(!bar)}>
           Аккаунт
           </Link>
-      </div>}
+      </div>} */}
+      <div className="AppBar">
+        <div className="nadp">
+        <i>Сервис по проходам</i> 
+        </div>
+      <div className="linkCenter">
+      <Link href='/workers/worker' className="Linkk" onClick={()=>setBar(!bar)}>
+          Добавить сотрудника
+          </Link>
+          <Link href='/workers' className="Linkk" onClick={()=>setBar(!bar)}>
+          Поиск сотрудника
+          </Link>
+        <Link href='/otmetki' className="Linkk" onClick={()=>setBar(!bar)}>
+          Поиск отметки
+          </Link>
+        <Link href='/tyrnikets' className="Linkk" onClick={()=>setBar(!bar)}>
+          Турникеты
+          </Link>
+      </div>
+      <div className="spr">
+      <div className="usSpr" onClick={()=>{router.push('/profile')}}>
+        <Image src={akk} alt='' className="logo"/>
+        <span>User</span>
+        </div>
+        </div>
+      </div>
       </>
   );
 };

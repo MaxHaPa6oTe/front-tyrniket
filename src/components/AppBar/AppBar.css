@@ -40,7 +40,6 @@ margin-top: 50px;
 }
 .naz i {
     margin-left: 14px;
-    margin-top: 1px;
 }
 .menu {
     top:0;
@@ -78,4 +77,49 @@ margin-top: 50px;
 }
 .sprava span {
 font-size: 14px;
+}
+
+
+
+
+
+
+
+.nadp {
+    margin-top:-16px;
+    transform:rotate(-4deg);
+    width: 20%;
+}
+.nadp i {
+   font-size: 22px; 
+   text-decoration: underline;
+   text-decoration-color: rgb(0,0,255);
+}
+.linkCenter {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+}
+.Linkk {
+    color: snow;
+    padding: 18px 0;
+    text-decoration: none;
+    margin: 10px;
+    padding: 18px 20px;
+}
+.Linkk:hover {
+    background-color: rgba(0, 0, 0, .4);
+    transition: cubic-bezier(1,0,0,1) .3s all;
+}
+.usSpr {
+    cursor: pointer;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.spr {
+    display: flex;
+    justify-content: end;
+    width: 20%;
 }
