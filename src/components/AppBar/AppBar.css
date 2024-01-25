@@ -6,6 +6,7 @@
         transform: translateX(0);
     }
 }
+
 .AppBar {
     z-index: 11;
     position: fixed;
@@ -21,7 +22,7 @@
 }
 .shapka {
     display: flex;
-    padding: 12px;
+    padding: 14px;
     color: snow;
     text-decoration: none;
 }
@@ -34,6 +35,7 @@
 margin-top: 50px;
 }
 .naz {
+    margin-top: 6px;
     font-size: 24px;
     display: flex;
     cursor: pointer;
@@ -65,18 +67,22 @@ margin-top: 50px;
     margin: 10% 0 0 2%;
 }
 .logo {
+    margin-top: -2px;
     width: 30px;
     height: 30px;
 }
 .sprava {
     cursor: pointer;
-    margin-top: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .sprava span {
-font-size: 14px;
+    font-size: 14px;
+}
+.spapkaAppBar {
+    display: flex;
+    justify-content: space-between;
 }
 
 
@@ -85,6 +91,20 @@ font-size: 14px;
 
 
 
+
+.AppBar1 {
+    z-index: 11;
+    position: fixed;
+    background: linear-gradient(to right, rgb(0, 30, 60), rgb(30, 30, 30));
+    width: 100%;
+    height: 60px;
+    color:Snow; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.5);
+}
 .nadp {
     margin-top:-16px;
     transform:rotate(-4deg);
@@ -100,12 +120,16 @@ font-size: 14px;
     display: flex;
     justify-content: center;
 }
-.Linkk {
+.Linkk a {
     color: snow;
-    padding: 18px 0;
     text-decoration: none;
-    margin: 10px;
-    padding: 18px 20px;
+}
+.Linkk {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    cursor: pointer;
 }
 .Linkk:hover {
     background-color: rgba(0, 0, 0, .4);
@@ -122,4 +146,13 @@ font-size: 14px;
     display: flex;
     justify-content: end;
     width: 20%;
+}
+
+@media screen and (max-width: 750px) {
+    .AppBar {
+        display: block;
+    }
+    .AppBar1 {
+        display: none;
+    }
 }
