@@ -22,14 +22,16 @@ const AppBar = () => {
   },[])
   return (
     <>
-      {/* <div className="AppBar">
+      <div className="AppBar">
+        <div className="spapkaAppBar">
         <div className="naz">
-        <Image src={menu} alt='' className="logo" onClick={()=>setBar(!bar)}/>
+        <Image src={menu} alt='' className="logo" onClick={()=>setBar(true)}/>
         <i>Сервис по проходам</i> 
         </div>
         <div className="sprava">
         <Image src={akk} alt='' className="logo"/>
         <span>User</span>
+        </div>
         </div>
       </div>
       {bar && <div className="menu" ref={wrapRef}>
@@ -53,27 +55,35 @@ const AppBar = () => {
         <Link href='/tyrnikets' className="shapka" onClick={()=>setBar(!bar)}>
           Турникеты
           </Link>
-        <Link href='/profile' className="shapka" onClick={()=>setBar(!bar)}>
-          Аккаунт
-          </Link>
-      </div>} */}
-      <div className="AppBar">
+      </div>}
+
+
+
+      <div className="AppBar1">
         <div className="nadp">
         <i>Сервис по проходам</i> 
         </div>
       <div className="linkCenter">
-      <Link href='/workers/worker' className="Linkk" onClick={()=>setBar(!bar)}>
+        <div className="Linkk">
+      <Link href='/workers/worker'>
           Добавить сотрудника
           </Link>
-          <Link href='/workers' className="Linkk" onClick={()=>setBar(!bar)}>
+          </div>
+          <div className="Linkk">
+          <Link href='/workers'>
           Поиск сотрудника
           </Link>
-        <Link href='/otmetki' className="Linkk" onClick={()=>setBar(!bar)}>
+          </div>
+          <div className="Linkk">
+        <Link href='/otmetki'>
           Поиск отметки
           </Link>
-        <Link href='/tyrnikets' className="Linkk" onClick={()=>setBar(!bar)}>
+          </div>
+          <div className="Linkk">
+        <Link href='/tyrnikets'>
           Турникеты
           </Link>
+          </div>
       </div>
       <div className="spr">
       <div className="usSpr" onClick={()=>{router.push('/profile')}}>
