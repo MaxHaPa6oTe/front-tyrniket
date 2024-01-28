@@ -32,13 +32,14 @@
     transition: cubic-bezier(1,0,0,1) .3s all;
 }
 .otstyp {
-margin-top: 50px;
+/* margin-top: 50px; */
 }
 .naz {
-    margin-top: 6px;
+    margin-top: -5px;
     font-size: 24px;
     display: flex;
     cursor: pointer;
+    align-items: center;
 }
 .naz i {
     margin-left: 14px;
@@ -67,7 +68,7 @@ margin-top: 50px;
     margin: 10% 0 0 2%;
 }
 .logo {
-    margin-top: -2px;
+    /* margin-top: -2px; */
     width: 30px;
     height: 30px;
 }
@@ -83,6 +84,7 @@ margin-top: 50px;
 .spapkaAppBar {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 

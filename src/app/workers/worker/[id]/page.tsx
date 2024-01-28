@@ -49,22 +49,16 @@ React.useEffect(()=>{
     <i><b>{worker?.fio}</b></i>
     </p>
     <label>
-        Отдел
+        Дата рождения
     </label>
     <p>
-    <i><b>{worker?.otdel}</b></i>
+    <i><b>{worker?.birthday}</b></i>
     </p>
     <label>
-        Телефон
+        Должность
     </label>
     <p>
-    <i><b>{worker?.phone}</b></i>
-    </p>
-    <label>
-        Номер карты
-    </label>
-    <p>
-    <i><b>{worker?.karta}</b></i>
+    <i><b>{worker?.post}</b></i>
     </p>
     <label>
         Дата добавления

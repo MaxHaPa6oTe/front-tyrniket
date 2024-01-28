@@ -15,8 +15,8 @@ const AddWorker = () => {
   const formData = new FormData()
   const [opov,setOpov] = React.useState<boolean>(false)
   const [fio,setFio] = React.useState<string>('')
-  const [otdel,setOtdel] = React.useState('')
-  const [phone,setPhone] = React.useState('')
+  const [post,setPost] = React.useState('')
+  const [dr,setDr] = React.useState('')
   const [karta, setKarta] = React.useState('')
   const [photo,setPhoto] = React.useState<File | null>(null) 
   const [oshibka,setOshibka] = React.useState('')
@@ -34,14 +34,14 @@ const AddWorker = () => {
     let array = ''
     checkedValues.forEach(o=>array=array+o)
     formData.append('fio',fio)
-    formData.append('otdel',otdel)
-    formData.append('phone',phone)
-    formData.append('karta',karta)
+    formData.append('post',post)
+    formData.append('birthday',dr)
+    formData.append('uid',karta)
     formData.append('dostyp',array)
     formData.append('photo',photo as Blob)
     axios.post('/worker/create',formData)
     .then(()=>{setOpov(true);setOshibka('');setFio('');setImage('');
-    setOtdel('');setPhone('');setKarta('');setPhoto(null);
+    setPost('');setDr('');setKarta('');setPhoto(null);
   })
     .catch(e=>setOshibka(e.response.data.message))
     if (opov === true) setTimeout(()=>setOpov(false),5200)
@@ -92,27 +92,26 @@ const AddWorker = () => {
     />
     <br/>
     <label>
-        Отдел
+        Дата рождения
     </label>
     <br/>
-    <input type="text"
+    <input type="date"
     required
-    value={otdel}
-    onChange={e=>setOtdel(e.target.value)}
-    />
-    <br/>
-   <label>
-        Телефон
-    </label>
-    <br/>
-    <input type="text"
-    required
-    value={phone}
-    onChange={e=>setPhone(e.target.value)}
+    onChange={e=>setDr(e.target.value)}
     />
     <br/>
     <label>
-        Номер карты
+        Должность
+    </label>
+    <br/>
+    <input type="text"
+    required
+    value={post}
+    onChange={e=>setPost(e.target.value)}
+    />
+    <br/>
+    <label>
+        Uid карты
     </label>
     <br/>
     <input type="text"
@@ -148,6 +147,8 @@ const AddWorker = () => {
     <Button2 text="Добавить"/>
     </div>
     </div>
+    <br/>
+    <br/>
     <br/>
 
     </form>

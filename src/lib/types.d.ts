@@ -6,10 +6,9 @@ export type User = {
 export interface IWorker {
   id: number,
   createdAt: string,
-  otdel: string,
+  post: string,
   fio: string,
-  phone: string,
-  karta: string,
+  birthday: string,
   photo: string
 }
 export interface IZdanie {
