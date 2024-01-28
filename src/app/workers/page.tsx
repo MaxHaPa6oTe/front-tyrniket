@@ -13,7 +13,7 @@ const Workers = () => {
   const router = useRouter()
   const [fio,setFio] = React.useState('')
   const [worker,setWorker] = React.useState<IWorker[]>([])
-  const [skolkoNado,setSkolkoNado] = React.useState(3)
+  const [skolkoNado,setSkolkoNado] = React.useState(6)
   const [oldFio, setOldFio] = React.useState('')
   const [count,setCount] = React.useState(0)  
   React.useEffect(()=>{
@@ -24,12 +24,12 @@ const Workers = () => {
   const Poisk = async () => {
     if (fio === ' ' || fio === '' || fio.length<3) {
       setWorker([])
-      setSkolkoNado(3)
+      setSkolkoNado(6)
       setCount(0)
       return 
     }
     if (oldFio !== fio) {
-      setSkolkoNado(3)
+      setSkolkoNado(6)
     }
     axios.defaults.headers.common = {'Authorization': `Bearer ${session?.backendTokens.accessToken}`}
 
@@ -48,13 +48,13 @@ const Workers = () => {
     <div className="yii">
       {worker.map((o)=>{
       return <div key={o.id} className="yi" onClick={()=>router.push(`/workers/worker/${o.id}`)}>
-        <img src={`${Backend_URL}/${o.photo}`} style={{width:'120px'}} alt={o.fio}/>
+        <img src={`${Backend_URL}/${o.photo}`} style={{width:'140px',height:'180px'}} alt={o.fio}/>
         <p>{o.fio}</p>
       </div>
     })}
     {worker.length<count?<div
     className="eche"
-    onClick={()=>setSkolkoNado(skolkoNado+3)}> 
+    onClick={()=>setSkolkoNado(skolkoNado+6)}> 
     <Button> 
       Еще?
     </Button>

@@ -28,7 +28,7 @@ const AppBar = () => {
         <Image src={menu} alt='' className="logo" onClick={()=>setBar(true)}/>
         <i>Сервис по проходам</i> 
         </div>
-        <div className="sprava">
+        <div className="sprava" onClick={()=>{router.push('/profile')}}>
         <Image src={akk} alt='' className="logo"/>
         <span>User</span>
         </div>
