@@ -31,9 +31,6 @@
     cursor: pointer;
     transition: cubic-bezier(1,0,0,1) .3s all;
 }
-.otstyp {
-/* margin-top: 50px; */
-}
 .naz {
     margin-top: -5px;
     font-size: 24px;
