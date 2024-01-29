@@ -52,6 +52,7 @@ async function poiskOtmetok() {
     <div className='filtr_naz'>
     <h3>Отметки</h3>
     </div>
+    <div className='tel1'>
       <div className='filtr_form_1'>
     <label>Выберите место:</label>
     <br/>
@@ -102,6 +103,7 @@ async function poiskOtmetok() {
       })}
     </ul>
     </div>
+    </div>
     <div className='filter_form_button'>
     <a href={`${Backend_URL}/otmetka/download?DataS=${DataS}&DataP=${DataP}&zdanie=${zdanie}&worker=${worker}`}
     className={worker && DataS && DataP?'':'aDisabled'}    
@@ -110,6 +112,7 @@ async function poiskOtmetok() {
     </div>
     </div>
     </form>
+
     <div className='otmetki'>
     <table>
       <tbody>
