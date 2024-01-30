@@ -33,7 +33,7 @@ const Workers = () => {
     }
     axios.defaults.headers.common = {'Authorization': `Bearer ${session?.backendTokens.accessToken}`}
 
-    const response = await axios.post(Backend_URL+'/worker/all', {fio, skolkoNado})
+    await axios.post(Backend_URL+'/worker/all', {fio, skolkoNado})
     .then(e=>{setWorker(e.data.workers);setOldFio(fio);setCount(e.data.count)})
   }
 

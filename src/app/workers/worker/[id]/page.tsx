@@ -16,14 +16,12 @@ type Props = {
 
 const Sotrydnik = (props:Props) => {
   const { data: session } = useSession();
-
+  axios.defaults.headers.common = {'Authorization': `Bearer ${session?.backendTokens.accessToken}`}
 const [worker, setWorker] = React.useState<null | IWorker>(null)
 React.useEffect(()=>{
-  axios.defaults.headers.common = {'Authorization': `Bearer ${session?.backendTokens.accessToken}`}
-
   axios.get(`${Backend_URL}/worker/${props.params.id}`)
-  .then(o=>setWorker(o.data)).catch(()=>console.log('ошибка'))
-},[])
+  .then(o=>setWorker(o.data)).catch(()=>console.log(''))
+},[session])
   return (
     <>
       <div className="sotrydnik">

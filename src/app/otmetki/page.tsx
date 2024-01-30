@@ -21,8 +21,8 @@ const Otmetki = () => {
   const [otmetki,setOtmetki] = useState<any[]>([])
   React.useEffect(()=>{
     axios.get('/tyrniket/zdanie')
-    .then(e=>setOtmetkaVZdanii(e.data))
-  },[])
+    .then(e=>setOtmetkaVZdanii(e.data)).catch(e=>console.log(''))
+  },[session])
   React.useEffect(()=>{
     if (poiskFio === fio) return
     setFio(poiskFio)

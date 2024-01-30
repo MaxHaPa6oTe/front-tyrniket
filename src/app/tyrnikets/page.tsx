@@ -21,10 +21,10 @@ const [zdanie,setZdanie] = React.useState<IZdanie[] | null>(null)
 const [table,setTable] = React.useState<ITyrniket[] | null>(null)
 React.useEffect(()=>{
     axios.get('/tyrniket/zdanie')
-    .then(o=>setZdanie(o.data)).catch(e=>console.log('ошибка'))
+    .then(o=>setZdanie(o.data)).catch(e=>console.log(''))
     axios.get('/tyrniket')
-    .then(o=>setTable(o.data)).catch(e=>console.log('ошибка'))
-},[opov])
+    .then(o=>setTable(o.data)).catch(e=>console.log(''))
+},[opov,session])
 
 const addT = async () => {
     let otvet = confirm('Вы хотите добавить новый турникет? В случае чего, удалять его придется в ручную')
