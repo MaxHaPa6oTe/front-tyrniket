@@ -25,8 +25,8 @@ const AddWorker = () => {
   React.useEffect(()=>{
     axios.defaults.baseURL=Backend_URL
     axios.defaults.headers.common = {'Authorization': `Bearer ${session?.backendTokens.accessToken}`}
-    axios.get('/tyrniket/zdanie').then(o=>setZdanie(o.data))
-  },[])
+    axios.get('/tyrniket/zdanie').then(o=>setZdanie(o.data)).catch(e=>console.log(''))
+  },[session])
   const ADD = () => {
     if (fio === ' ' || fio === '' || fio.length<3 || !photo) {
         return

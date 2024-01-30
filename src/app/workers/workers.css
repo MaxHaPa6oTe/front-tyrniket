@@ -30,7 +30,7 @@
 .yi {
   border-radius: 8px;
   cursor: pointer;
-  padding: 10px;
+  padding: 8px;
   text-align: center;
   height: 240px;
   width: 190px;
@@ -50,6 +50,10 @@
   padding-left: 30px;
   padding-right: 30px;
   flex-wrap: wrap;
+}
+.yii p {
+  margin-top: -4px;
+  line-height: 20px;
 }
 .eche {
   position: absolute;

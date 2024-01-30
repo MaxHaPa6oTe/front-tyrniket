@@ -6,6 +6,14 @@
         transform: translateX(0);
     }
 }
+@keyframes visibleBarTel {
+    0% {
+        transform: translateX(-500px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
 
 .AppBar {
     z-index: 11;
@@ -32,7 +40,7 @@
     transition: cubic-bezier(1,0,0,1) .3s all;
 }
 .naz {
-    margin-top: -5px;
+    margin-top: -9px;
     font-size: 24px;
     display: flex;
     cursor: pointer;
@@ -70,6 +78,7 @@
     height: 30px;
 }
 .sprava {
+    margin-top: -3px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -105,7 +114,7 @@
     box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.5);
 }
 .nadp {
-    margin-top:-16px;
+    margin-top:-12px;
     transform:rotate(-4deg);
     width: 20%;
 }
@@ -136,7 +145,7 @@
 }
 .usSpr {
     cursor: pointer;
-    margin-top: 5px;
+    margin-top: 6px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -153,5 +162,12 @@
     }
     .AppBar1 {
         display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .menu {
+        width: 100%;
+        animation: visibleBarTel .5s forwards;
     }
 }
